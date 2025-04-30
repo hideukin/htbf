@@ -155,7 +155,7 @@ export async function fetchAndFilterEntries(
         date: entry.date,
         bookmarkCount: entry.bookmarkCount
       })),
-      total: entries.length
+      total: filtered.length
     };
   } catch (error) {
     console.error('Error processing RSS:', error);
