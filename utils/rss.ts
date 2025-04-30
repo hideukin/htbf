@@ -106,10 +106,10 @@ function parseEntries(xmlText: string): HatenaEntry[] {
 
     const descriptionParts = [];
     if (imageUrls[0]) {
-      descriptionParts.push(`image: ${imageUrls[0]}`);
+      descriptionParts.push(`<img src="${imageUrls[0]}" alt="Entry thumbnail" />`);
     }
     if (commentUrls[0]) {
-      descriptionParts.push(`hatebu: ${commentUrls[0]}`);
+      descriptionParts.push(`<p><a href="${commentUrls[0]}" target="_blank">はてブコメント</a></p>`);
     }
     if (descriptions[0]) {
       descriptionParts.push(descriptions[0]);
