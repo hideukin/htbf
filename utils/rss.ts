@@ -101,11 +101,26 @@ function parseEntries(xmlText: string): HatenaEntry[] {
     const descriptions = extractTagContent(item, "description");
     const dates = extractTagContent(item, "dc:date");
     const bookmarkCounts = extractTagContent(item, "hatena:bookmarkcount");
+    const imageUrls = extractTagContent(item, "hatena:imageurl");
+    const commentUrls = extractTagContent(item, "hatena:bookmarkCommentListPageUrl");
+
+    const descriptionParts = [];
+    if (imageUrls[0]) {
+      descriptionParts.push(`image: ${imageUrls[0]}`);
+    }
+    if (commentUrls[0]) {
+      descriptionParts.push(`hatebu: ${commentUrls[0]}`);
+    }
+    if (descriptions[0]) {
+      descriptionParts.push(descriptions[0]);
+    }
+
+    const description = descriptionParts.join("\n");
 
     const entry = {
       title: titles[0] || "",
       link: links[0] || "",
-      description: descriptions[0] || "",
+      description: description,
       date: dates[0] || "",
       bookmarkCount: bookmarkCounts[0] ? parseInt(bookmarkCounts[0]) : 0
     };
