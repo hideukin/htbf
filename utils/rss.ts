@@ -153,7 +153,7 @@ export async function fetchAndFilterEntries(
         link: entry.link,
         description: entry.description,
         date: entry.date,
-        bookmarks: entry.bookmarkCount
+        bookmarkCount: entry.bookmarkCount
       })),
       total: entries.length
     };
