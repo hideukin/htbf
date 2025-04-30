@@ -10,7 +10,7 @@ interface Entry {
   link: string;
   description: string;
   date: string;
-  bookmarks: number;
+  bookmarkCount: number;
 }
 
 export default function RssViewer() {
@@ -108,7 +108,7 @@ export default function RssViewer() {
                 <span class="mr-4">
                   📅 {new Date(entry.date).toLocaleString("ja-JP")}
                 </span>
-                <span>🔖 {entry.bookmarks} ブックマーク</span>
+                <span>🔖 {entry.bookmarkCount} ブックマーク</span>
               </div>
             </a>
           </div>
