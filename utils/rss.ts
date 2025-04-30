@@ -141,7 +141,7 @@ function parseEntries(xmlText: string): HatenaEntry[] {
 /**
  * エントリーをブックマーク数でフィルタリングする
  */
-function filterByBookmarkCount(entries: HatenaEntry[], threshold: number): HatenaEntry[] {
+export function filterByBookmarkCount(entries: HatenaEntry[], threshold: number): HatenaEntry[] {
   console.log('Filtering entries with threshold:', threshold);
   console.log('Before filter - total entries:', entries.length);
   console.log('Entry bookmark counts:', entries.map(e => e.bookmarkCount).join(', '));
