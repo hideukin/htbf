@@ -9,8 +9,35 @@ export const handler = async (
     const url = new URL(req.url);
     const category = url.searchParams.get("category") as HatenaCategory | null;
     const threshold = parseInt(url.searchParams.get("threshold") || "100");
+    const format = url.searchParams.get("format") || "json";
 
     const entries = await fetchAndFilterEntries(category || "all", threshold);
+
+    if (format === "rss") {
+      const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:hatena="http://b.hatena.ne.jp/ns/">
+  <channel>
+    <title>はてなブックマーク - ホットエントリー ${category || "all"}</title>
+    <link>https://b.hatena.ne.jp/hotentry/${category || ""}</link>
+    <description>はてなブックマークのホットエントリー（${category || "全て"}）</description>
+    <language>ja</language>
+    ${entries.filtered.map(entry => `
+    <item>
+      <title><![CDATA[${entry.title}]]></title>
+      <link>${entry.link}</link>
+      <description><![CDATA[${entry.description}]]></description>
+      <pubDate>${new Date(entry.date).toUTCString()}</pubDate>
+      <hatena:bookmarkcount>${entry.bookmarkCount}</hatena:bookmarkcount>
+    </item>`).join("\n")}
+  </channel>
+</rss>`;
+
+      return new Response(rss, {
+        headers: {
+          "Content-Type": "application/xml",
+        },
+      });
+    }
 
     return new Response(JSON.stringify(entries), {
       headers: {
