@@ -11,6 +11,7 @@ interface Entry {
   description: string;
   date: string;
   bookmarkCount: number;
+  commentUrl: string;
 }
 
 export default function RssViewer() {
@@ -89,7 +90,7 @@ export default function RssViewer() {
       )}
 
       <div class="mb-4 text-gray-600">
-        全{entries.value.total}件中、{entries.value.filtered.length}件表示
+        全{entries.value.total}件中{entries.value.filtered.length}件表示
         （ブックマーク数{threshold
           .value}以上）
       </div>
@@ -108,7 +109,16 @@ export default function RssViewer() {
                 <span class="mr-4">
                   📅 {new Date(entry.date).toLocaleString("ja-JP")}
                 </span>
-                <span>🔖 {entry.bookmarkCount} ブックマーク</span>
+                <a
+                  href={`https://b.hatena.ne.jp/entry/${
+                    encodeURIComponent(entry.link)
+                  }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  🔖 {entry.bookmarkCount} ブックマーク
+                </a>
               </div>
             </a>
           </div>

@@ -34,6 +34,7 @@ interface HatenaEntry {
   description: string;
   date: string;
   bookmarkCount: number;
+  commentUrl: string;
 }
 
 /**
@@ -122,7 +123,8 @@ function parseEntries(xmlText: string): HatenaEntry[] {
       link: links[0] || "",
       description: description,
       date: dates[0] || "",
-      bookmarkCount: bookmarkCounts[0] ? parseInt(bookmarkCounts[0]) : 0
+      bookmarkCount: bookmarkCounts[0] ? parseInt(bookmarkCounts[0]) : 0,
+      commentUrl: commentUrls[0] || `https://b.hatena.ne.jp/entry/${encodeURIComponent(links[0] || "")}`
     };
 
     console.log(`Parsed entry ${index + 1}/${items.length}:`, {
@@ -168,7 +170,8 @@ export async function fetchAndFilterEntries(
         link: entry.link,
         description: entry.description,
         date: entry.date,
-        bookmarkCount: entry.bookmarkCount
+        bookmarkCount: entry.bookmarkCount,
+        commentUrl: entry.commentUrl
       })),
       total: entries.length
     };
