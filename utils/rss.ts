@@ -23,6 +23,11 @@ export type HatenaCategory = typeof HATENA_CATEGORIES[number];
 /**
  * はてなブックマークのエントリー情報
  */
+interface RssResponse {
+  total: number;
+  filtered: HatenaEntry[];
+}
+
 interface HatenaEntry {
   title: string;
   link: string;
@@ -136,13 +141,22 @@ function filterByBookmarkCount(entries: HatenaEntry[], threshold: number): Haten
 export async function fetchAndFilterEntries(
   category: HatenaCategory = 'all',
   threshold: number = 100
-): Promise<HatenaEntry[]> {
+): Promise<{ total: number; filtered: HatenaEntry[] }> {
   try {
     console.log(`Fetching entries for category: ${category}`); // デバッグログ
     const xmlText = await fetchRSS(category);
     const entries = parseEntries(xmlText);
     const filtered = filterByBookmarkCount(entries, threshold);
-    return filtered;
+    return {
+      filtered: filtered.map(entry => ({
+        title: entry.title,
+        link: entry.link,
+        description: entry.description,
+        date: entry.date,
+        bookmarks: entry.bookmarkCount
+      })),
+      total: entries.length
+    };
   } catch (error) {
     console.error('Error processing RSS:', error);
     throw error;
