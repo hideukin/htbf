@@ -2,6 +2,9 @@ import { useSignal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
 import { HATENA_CATEGORIES, type HatenaCategory } from "../utils/rss.ts";
 
+const DEFAULT_BOOKMARK_CATEGORY = "all";
+const DEFAULT_BOOKMARK_THRESHOLD = 100;
+
 interface Entry {
   title: string;
   link: string;
@@ -17,8 +20,8 @@ export default function RssViewer() {
   });
   const loading = useSignal(false);
   const error = useSignal<string | null>(null);
-  const category = useSignal<HatenaCategory>("all");
-  const threshold = useSignal(100);
+  const category = useSignal<HatenaCategory>(DEFAULT_BOOKMARK_CATEGORY);
+  const threshold = useSignal<number>(DEFAULT_BOOKMARK_THRESHOLD);
 
   async function fetchEntries(
     selectedCategory: HatenaCategory,
