@@ -133,7 +133,7 @@ function parseEntries(xmlText: string): HatenaEntry[] {
       descriptionParts.push(`<img src="${imageUrls[0]}" alt="Entry thumbnail" />`);
     }
     if (commentUrls[0]) {
-      descriptionParts.push(`<p><a href="${commentUrls[0]}" target="_blank">はてブコメント</a></p>`);
+      descriptionParts.push(`<p><a href="${commentUrls[0]}" target="_blank">${bookmarkCounts[0] || 0} Users</a></p>`);
     }
     if (descriptions[0]) {
       descriptionParts.push(descriptions[0]);
