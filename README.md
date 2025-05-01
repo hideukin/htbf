@@ -4,7 +4,13 @@ A web application for browsing popular entries from Hatena Bookmark.
 
 ## Demo
 
+### Site
+
 https://htbf.deno.dev/
+
+### RSS(example)
+
+https://htbf.deno.dev/api/rss?format=rss&category=it&threshold=100
 
 ## Features
 
