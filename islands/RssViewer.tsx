@@ -1,6 +1,10 @@
 import { useSignal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
-import { HATENA_CATEGORIES, type HatenaCategory } from "../utils/rss.ts";
+import {
+  getCategoryLabel,
+  HATENA_CATEGORIES,
+  type HatenaCategory,
+} from "../utils/rss.ts";
 
 const DEFAULT_BOOKMARK_CATEGORY = "all";
 const DEFAULT_BOOKMARK_THRESHOLD = 100;
@@ -64,7 +68,7 @@ export default function RssViewer() {
         >
           {HATENA_CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>
-              {cat}
+              {getCategoryLabel(cat)}
             </option>
           ))}
         </select>

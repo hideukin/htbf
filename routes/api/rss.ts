@@ -1,5 +1,5 @@
 import { HandlerContext } from "$fresh/server.ts";
-import { fetchAndFilterEntries, HatenaCategory } from "../../utils/rss.ts";
+import { fetchAndFilterEntries, HatenaCategory, getCategoryLabel } from "../../utils/rss.ts";
 
 export const handler = async (
   req: Request,
@@ -17,9 +17,9 @@ export const handler = async (
       const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:hatena="http://b.hatena.ne.jp/ns/">
   <channel>
-    <title>はてなブックマーク - ホットエントリー ${category || "all"}</title>
+    <title>はてブ人気 ${category ? getCategoryLabel(category) : "総合"}</title>
     <link>https://b.hatena.ne.jp/hotentry/${category || ""}</link>
-    <description>はてなブックマークのホットエントリー（${category || "全て"}）</description>
+    <description>はてブ${category ? getCategoryLabel(category) : "総合"}${threshold}</description>
     <language>ja</language>
     ${entries.filtered.map(entry => `
     <item>

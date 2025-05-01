@@ -18,6 +18,29 @@ export const HATENA_CATEGORIES = [
   'game'
 ] as const;
 
+/**
+ * カテゴリーの日本語表示名マッピング
+ */
+export const CATEGORY_LABELS = {
+  'all': '総合',
+  'general': '一般',
+  'social': '世の中',
+  'economics': '政治と経済',
+  'life': '暮らし',
+  'knowledge': '学び',
+  'it': 'IT',
+  'fun': 'おもしろ',
+  'entertainment': 'エンタメ',
+  'game': 'ゲーム'
+} as const;
+
+/**
+ * カテゴリーの日本語表示名を取得する
+ */
+export function getCategoryLabel(category: HatenaCategory): string {
+  return CATEGORY_LABELS[category];
+}
+
 export type HatenaCategory = typeof HATENA_CATEGORIES[number];
 
 /**
