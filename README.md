@@ -6,11 +6,11 @@ A web application for browsing popular entries from Hatena Bookmark.
 
 ### Site
 
-https://htbf.deno.dev/
+https://htbf.hideukin.deno.net/
 
 ### RSS(example)
 
-https://htbf.deno.dev/api/rss?format=rss&category=it&threshold=100
+https://htbf.hideukin.deno.net/api/rss?format=rss&category=it&threshold=100
 
 ## Features
 
